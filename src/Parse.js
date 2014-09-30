@@ -288,14 +288,16 @@ _html2canvas.Parse = function (images, options) {
         return;
       }
 
+      drawText(text, x, listBounds.bottom, ctx);
     } else if ((/^(square|disc)$/i.test(type))) {
-      x = elBounds.left + FIX_LI_AXIS_X;
-      y = elBounds.top + FIX_LI_AXIS_Y;
-      // fallback for list style type
-      ctx.setVariable("fillStyle", getCSS(element, "color"));
-      ctx.fillRect(x, y, defaultSize, defaultSize);
-    } else {
-      return;
+        x = elBounds.left + FIX_LI_AXIS_X;
+        y = elBounds.top + FIX_LI_AXIS_Y;
+        // fallback for list style type
+        ctx.setVariable("fillStyle", getCSS(element, "color"));
+        ctx.fillRect(x, y, defaultSize, defaultSize);
+      } else {
+
+      }
     }
 
     drawText(text, x, listBounds.bottom, ctx);
