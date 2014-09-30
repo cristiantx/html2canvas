@@ -1302,10 +1302,14 @@ _html2canvas.Parse = function (images, options) {
 
   function renderListItem(element, stack, elBounds) {
     var x,
+    y,
     text,
     ctx = stack.ctx,
     type = getCSS(element, "listStyleType"),
-    listBounds;
+    listBounds,
+    FIX_LI_AXIS_X = -17,
+    FIX_LI_AXIS_Y = 7,
+    defaultSize = 5;
 
     if (/^(decimal|decimal-leading-zero|upper-alpha|upper-latin|upper-roman|lower-alpha|lower-greek|lower-latin|lower-roman)$/i.test(type)) {
       text = listItemText(element, type);
@@ -1319,14 +1323,16 @@ _html2canvas.Parse = function (images, options) {
         return;
       }
 
+      drawText(text, x, listBounds.bottom, ctx);
     } else if ((/^(square|disc)$/i.test(type))) {
-      x = elBounds.left + FIX_LI_AXIS_X;
-      y = elBounds.top + FIX_LI_AXIS_Y;
-      // fallback for list style type
-      ctx.setVariable("fillStyle", getCSS(element, "color"));
-      ctx.fillRect(x, y, defaultSize, defaultSize);
-    } else {
-      return;
+        x = elBounds.left + FIX_LI_AXIS_X;
+        y = elBounds.top + FIX_LI_AXIS_Y;
+        // fallback for list style type
+        ctx.setVariable("fillStyle", getCSS(element, "color"));
+        ctx.fillRect(x, y, defaultSize, defaultSize);
+      } else {
+        return;
+      }
     }
 
     drawText(text, x, listBounds.bottom, ctx);
