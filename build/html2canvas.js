@@ -1,6 +1,6 @@
 /*
   html2canvas 0.4.1 <http://html2canvas.hertzen.com>
-  Copyright (c) 2013 Niklas von Hertzen
+  Copyright (c) 2014 Niklas von Hertzen
 
   Released under MIT License
 */
@@ -1319,8 +1319,17 @@ _html2canvas.Parse = function (images, options) {
         return;
       }
 
-      drawText(text, x, listBounds.bottom, ctx);
+    } else if ((/^(square|disc)$/i.test(type))) {
+      x = elBounds.left + FIX_LI_AXIS_X;
+      y = elBounds.top + FIX_LI_AXIS_Y;
+      // fallback for list style type
+      ctx.setVariable("fillStyle", getCSS(element, "color"));
+      ctx.fillRect(x, y, defaultSize, defaultSize);
+    } else {
+      return;
     }
+
+    drawText(text, x, listBounds.bottom, ctx);
   }
 
   function loadImage (src){
