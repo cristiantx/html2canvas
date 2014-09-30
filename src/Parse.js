@@ -1145,7 +1145,7 @@ _html2canvas.Parse = function (images, options) {
   }
 
   return init();
-};
+}
 
 function h2czContext(zindex) {
   return {

@@ -1331,11 +1331,8 @@ _html2canvas.Parse = function (images, options) {
         ctx.setVariable("fillStyle", getCSS(element, "color"));
         ctx.fillRect(x, y, defaultSize, defaultSize);
       } else {
-        return;
-      }
-    }
 
-    drawText(text, x, listBounds.bottom, ctx);
+      }
   }
 
   function loadImage (src){
@@ -2179,7 +2176,7 @@ _html2canvas.Parse = function (images, options) {
   }
 
   return init();
-};
+}
 
 function h2czContext(zindex) {
   return {
